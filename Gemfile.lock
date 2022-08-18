@@ -213,16 +213,15 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   puma (~> 5.0)
-  rails (~> 6.1.6, >= 6.1.6.1)
+  rails (~> 6.1.0)
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
-  tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
-  webpacker (~> 5.4)
+  webpacker (~> 5.0)
 
 RUBY VERSION
    ruby 2.6.1p33
