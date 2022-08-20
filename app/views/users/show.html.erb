@@ -1,1 +1,8 @@
 <h1>Welcome <%=@user.name%></h1>
+<a href="/project/new">Create new Project</a>
+<%if @user.projects.length >= 1%>
+My projects
+  <%@user.projects.each do |project|%>
+    <%=link_to project.name,project_path(project.id)%>
+  <%end%>
+<%end%>
