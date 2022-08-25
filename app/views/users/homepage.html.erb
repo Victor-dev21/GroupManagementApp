@@ -1,1 +1,15 @@
 <h1>Welcome <%=@user.name%></h1>
+<a href="/homepage">Home</a><br>
+<%=link_to "Create new project", new_user_project_path(@user.id)%><br>
+<a href="/tasks">My tasks</a>
+<%if @user.projects.length >= 1%>
+My projects
+
+  <%@user.projects.each do |project|%>
+    <%=link_to project.name,project_path(project.id)%>
+  <%end%>
+<%end%>
+
+<%@user.tasks.each do |task|%>
+  <%=link_to task.name,task_path(task.id)%>
+<%end%>
