@@ -14,7 +14,7 @@
  *= require_self
  */
  .field_with_errors {
-   padding: 5px;
+   padding: 10px;
    background-color: red;
    display: table;
  }

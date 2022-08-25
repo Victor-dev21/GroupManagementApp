@@ -9,9 +9,11 @@ class UsersController < ApplicationController
 
   def create
 
-    @user = User.new(user_params(:name,:username,:password))
-    if @user.valid?
-      redirect_to user_path(@user)
+    @user = User.new(user_params)
+    puts "::::::::::::::::::::::::::::"
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to homepage_path
     else
       #redirect_to signup_path
       #puts "Here"
@@ -20,12 +22,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
   end
 
 
-  def user_params(*args)
-    params.require(:user).permit(args)
+  def user_params
+    params.require(:user).permit(:name,:username, :password, :password_confirmation)
   end
 
 
