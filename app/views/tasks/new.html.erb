@@ -1,0 +1,16 @@
+<h1><%=@project.name%></h1>
+
+<%=form_for @task do |t|%>
+ <%= t.hidden_field :project_id%>
+  <%=t.label :task_name%>: <%=t.text_field :name%>
+  <%=t.label :status%>: <%=t.text_field :status%>
+  <%=t.label :assignee%>: <%=t.collection_select :assignee, User.all,:id,:name, include_blank: true%>
+  <%=t.label :section%>: <%=t.collection_select :section_id, @sections,:id,:name, include_blank: 'Select a section'%>
+  <%=t.fields_for :section do |f|%>
+  <%= f.hidden_field :project_id%>
+  <%=f.label :section_name%>: <%=f.text_field :name%>
+
+  <%end%>
+  <%=t.label :status%>: <%=t.text_field :status%>
+  <%=t.submit%>
+<%end%>

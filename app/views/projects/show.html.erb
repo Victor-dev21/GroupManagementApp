@@ -1,2 +1,15 @@
 <u><h3><%=@project.name%></h3></u>
-<%=button_to "New task", new_task_path%>
+<%=button_to "New task", new_project_task_path(@project.id),  method:"get"%><br>
+<%=button_to "New section", new_project_section_path(@project.id), method:"get"%><br>
+<%@sections.each do |section|%>
+<%=section.display_info%><br>
+<%end%>
+<hr>
+<%@sections.each do |section|%>
+<u><%=section.name%></u>
+<h3>Tasks</h3> <br>
+<%section.tasks.each do |task|%>
+<%=task.name%>
+<%end%>
+<hr>
+<%end%>
