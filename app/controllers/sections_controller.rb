@@ -13,11 +13,14 @@ class SectionsController < ApplicationController
     @section = Section.find_or_create_by(name: params[:section][:name])
     @project = Project.find(params[:section][:project_id])
     @section.update(project_id:@project.id,status:params[:section][:status])
+    #binding.pry
     if(!@project.sections.include?(@section))
       @project.sections << @section
+      #binding.pry
     end
-
     #redirect_to project_section_path(@section.project.id,@section.id)
+    @section.save
+    #binding.pry
     redirect_to project_path(@project)
   end
 
