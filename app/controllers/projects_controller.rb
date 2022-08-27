@@ -31,6 +31,12 @@ class ProjectsController < ApplicationController
     puts @sections.length
   end
 
+  def destroy
+    @project = Project.find(params[:project_id])
+    @project.destroy
+    redirect_to homepage_path
+  end
+
 
   def project_params
     params.require(:project).permit(:name,:creator)

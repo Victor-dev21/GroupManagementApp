@@ -1,4 +1,4 @@
-<h1>My tasksrails </h1>
+<h1>My tasks </h1>
 <%@tasks.each do |task|%>
-<%=link_to task.name, task_path(task.id)%>
+<%=link_to task.name, task_path(task.id)%>Assigned by <%=User.find(task.creator).name%><br>
 <%end%>

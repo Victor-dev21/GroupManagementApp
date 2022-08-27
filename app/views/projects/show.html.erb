@@ -9,6 +9,8 @@
 
 <%@sections.each do |section|%>
 <h2><u><%=link_to section.name, project_section_path(@project.id,section.id)%></u></h2>
+<%=button_to "Edit", new_project_task_path(@project.id),  method:"get"%><br>
+<%=button_to "Delete", delete_section_path(@project.id,section.id), method:"delete"%><br>
 
 <%section.tasks.each do |task|%>
 <%=link_to task.name, project_task_path(@project.id,task.id)%>

@@ -12,7 +12,7 @@ class TasksController < ApplicationController
     @user = User.find(session[:user_id])
     @project = Project.find(params[:project_id])
     @sections = @project.sections
-    @task = Task.new(project_id: @project.id)
+    @task = Task.new(project_id: @project.id,creator:@user.id)
     #@task.build_section(project_id:@project.id)
   end
 
@@ -23,6 +23,7 @@ class TasksController < ApplicationController
 
     @user = User.find(session[:user_id])
     UserTask.create(user_id: @user.id,task_id: @task.id)
+    binding.pry
     redirect_to project_task_path(@task.project.id,@task.id)
   end
 
@@ -50,7 +51,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:name,:section_id,:project_id,:status,:assignee,section_attributes:[:name,:project_id,:status])
+    params.require(:task).permit(:name,:creator,:section_id,:project_id,:status,:assignee,section_attributes:[:name,:project_id,:status,:creator])
   end
 
 end
