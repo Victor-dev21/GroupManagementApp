@@ -28,15 +28,16 @@ class TasksController < ApplicationController
 
   def show
     @user = User.find(session[:user_id])
-    @project = Project.find(params[:project_id])
+    #@project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
+    @project = @task.project
   end
 
   def edit
     @user = User.find(session[:user_id])
 
     @task = @user.tasks.find(params[:id])
-    @project = @user.projects.find(params[:project_id])
+    @project = @task.project
       @sections = @project.sections
   end
 

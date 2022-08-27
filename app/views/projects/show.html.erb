@@ -1,3 +1,7 @@
+<%=link_to "Home", homepage_path%>
+<%=link_to "My tasks", tasks_path%>
+<%=link_to "My projects", user_projects_path(@user.id)%>
+<a href="/logout">logout</a>
 <u><h1><%=@project.name%></h1></u>
 <%=button_to "New task", new_project_task_path(@project.id),  method:"get"%><br>
 <%=button_to "New section", new_project_section_path(@project.id), method:"get"%><br>

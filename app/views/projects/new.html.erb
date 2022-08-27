@@ -1,4 +1,6 @@
 <h1>Create a new project</h1>
-<%=form_for @project do |p|%>
-  <%=p.label :project_name%>: <%=p.text_field :name%>
+<%=form_for @project do |f|%>
+<%=f.hidden_field :creator%>
+  <%=f.label :project_name%>: <%=f.text_field :name%>
+  <%=f.submit%>
 <%end%>

@@ -1,3 +1,4 @@
+<h1>My tasksrails </h1>
 <%@tasks.each do |task|%>
-<%=task.name%>
+<%=link_to task.name, task_path(task.id)%>
 <%end%>

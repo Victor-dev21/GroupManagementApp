@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of  :username
   has_many :user_projects
-  has_many :projects, through: :user_projects
+  has_many :projects, -> { distinct }, through: :user_projects
   #has_many :tasks, through: :projects
   has_many :user_tasks
   has_many :tasks, through: :user_tasks
