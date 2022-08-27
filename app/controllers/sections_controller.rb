@@ -25,11 +25,21 @@ class SectionsController < ApplicationController
   end
 
   def show
+
     @section = Section.find(params[:id])
+    @project = @section.project
+    @task = @section.tasks.build
+    #@task.project = 
   end
 
 
   def destroy
+
+  end
+
+private
+
+  def section_params
 
   end
 end

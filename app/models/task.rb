@@ -7,10 +7,9 @@ class Task < ActiveRecord::Base
 
 
   def section_attributes=(section)
-    puts ":::::::IN here "
     if(!section[:name].empty?)
       section = Section.find_or_create_by(name: section[:name],project_id: section[:project_id])
-      binding.pry
+      #binding.pry
       section.status = section[:status]
       section.save
       #binding.pry
@@ -18,7 +17,7 @@ class Task < ActiveRecord::Base
       #self.section.update(status: self.status)
       self.section_id = section.id #(section_id: section.id)
       #binding.pry
-      binding.pry
+      #binding.pry
       self.save
     end
     #section = Section.find_or_create_by(name:section[:name])

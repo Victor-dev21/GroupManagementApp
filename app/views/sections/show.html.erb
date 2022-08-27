@@ -1,0 +1,13 @@
+<h1><%=@project.name%></h1>
+<h3><%=@section.name%></h3>
+
+<%=form_for @task do |t|%>
+ <%= t.hidden_field :project_id, value: @project.id%>
+ <%= t.hidden_field :section_id, value: @section.id%>
+  <%=t.label :task_name%>: <%=t.text_field :name%>
+  <%=t.label :status%>: <%=t.text_field :status%>
+  <%=t.label :assignee%>: <%=t.collection_select :assignee, User.all,:id,:name, include_blank: 'Select an assignee'%>
+
+  <%=t.submit%>
+
+<%end%>

@@ -4,6 +4,8 @@ class TasksController < ApplicationController
 
   def index
 
+    @tasks = User.find(session[:user_id]).tasks
+
   end
 
   def new
@@ -18,10 +20,9 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.create(task_params)
-    
+
     @user = User.find(session[:user_id])
     UserTask.create(user_id: @user.id,task_id: @task.id)
-    binding.pry
     redirect_to project_task_path(@task.project.id,@task.id)
   end
 
@@ -29,6 +30,21 @@ class TasksController < ApplicationController
     @user = User.find(session[:user_id])
     @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
+  end
+
+  def edit
+    @user = User.find(session[:user_id])
+
+    @task = @user.tasks.find(params[:id])
+    @project = @user.projects.find(params[:project_id])
+      @sections = @project.sections
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    @task.update(task_params)
+    redirect_to project_task_path(@task.project.id,@task.id)
+
   end
 
   private
