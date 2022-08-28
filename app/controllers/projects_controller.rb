@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   def index
     #@projects = User.find().projects
-      @user = User.find(session[:user_id])
+    @user = User.find(session[:user_id])
     if(session[:user_id])
       @projects = @user.projects
     end

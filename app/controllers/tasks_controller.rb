@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
 
   def index
-
+    
     @tasks = User.find(session[:user_id]).tasks
 
   end

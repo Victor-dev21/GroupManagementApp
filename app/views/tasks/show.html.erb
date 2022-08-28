@@ -2,5 +2,7 @@
 
 <h2><%=@task.name%></h2>
 <h3>Asignee: <%=@assignee%></h3>
+<%if(@task.creator == @user.id)%>
 <%=button_to "Edit", edit_project_task_path(@project.id,@task.id), method:"get"%> <br>
 <%=button_to "Delete", delete_task_path(@task.id), method:"delete"%>
+<%end%>
