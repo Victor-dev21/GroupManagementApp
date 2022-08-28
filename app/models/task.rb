@@ -21,4 +21,11 @@ class Task < ActiveRecord::Base
       binding.pry
     end
   end
+
+  def assign_task
+    if self.assignee.nil?
+      self.assignee = self
+    end
+    self.save
+  end
 end

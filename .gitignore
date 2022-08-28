@@ -26,7 +26,7 @@ config/secrets.yml
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
-
+.env
 /public/assets
 .byebug_history
 

@@ -1,6 +1,6 @@
 <h1><%=@project.name%></h1>
 <h3><%=@section.name%></h3>
-
+<h4>Create a new task</h4>
 <%=form_for @task do |t|%>
  <%= t.hidden_field :project_id, value: @project.id%>
  <%= t.hidden_field :section_id, value: @section.id%>
