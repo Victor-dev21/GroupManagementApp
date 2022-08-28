@@ -23,12 +23,20 @@ class Task < ActiveRecord::Base
   end
 
   def assign_task(session)
-
     if self.assignee.nil?
       self.update(assignee: self.creator)
-      binding.pry
+    #  binding.pry
     end
     self.save
-    binding.pry
+    #binding.pry
+  end
+
+
+  def display_assignee
+    if(self.assignee.nil?)
+      return ""
+    else
+      return User.find(self.assignee).name
+    end
   end
 end

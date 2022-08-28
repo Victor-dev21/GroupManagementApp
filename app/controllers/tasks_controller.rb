@@ -5,7 +5,8 @@ class TasksController < ApplicationController
   def index
     @user = User.find(session[:user_id])
     @tasks = User.find(session[:user_id]).tasks
-    binding.pry
+    @assigned_tasks = Task.all.where(assignee: @user.id)
+    #binding.pry
   end
 
   def new
@@ -23,7 +24,7 @@ class TasksController < ApplicationController
     @task.assign_task(session)
     @user = User.find(session[:user_id])
     UserTask.create(user_id: @user.id,task_id: @task.id)
-    binding.pry
+    #binding.pry
     redirect_to project_task_path(@task.project.id,@task.id)
   end
 
@@ -31,10 +32,10 @@ class TasksController < ApplicationController
     @user = User.find(session[:user_id])
     #@project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
-    @assignee = User.find(@task.assignee).name
+    @assignee = @task.display_assignee
     #binding.pry
     @project = @task.project
-    binding.pry
+    #binding.pry
   end
 
   def edit
@@ -47,9 +48,10 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    @user_task = UserTask.where(user_id: @task.creator).update(user_id: @task.assignee)
-
     @task.update(task_params)
+
+    #@user_task = UserTask.where(user_id: @task.creator).update(user_id: @task.assignee)
+    #binding.pry
     redirect_to project_task_path(@task.project.id,@task.id)
 
   end
