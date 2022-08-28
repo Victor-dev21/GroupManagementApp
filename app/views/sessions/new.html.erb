@@ -1,6 +1,18 @@
-<%= form_for :user, url: '/login' do |f| %>
-  Username: <%= f.text_field :username %>
-  Password: <%= f.password_field :password %>
+
+<%= form_for @user , url: '/login' do |f| %>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h5>Errors:</h5>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%=f.label :username%> <%=f.text_field :username%><br>
+<%=f.label :password%> <%=f.text_field :password%><br>
   <%= f.submit "Submit" %>
 <% end %>
 <%= link_to('Log in with GitHub!', '/auth/github', method: :post) %><br>

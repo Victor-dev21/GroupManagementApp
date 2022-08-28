@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :require_login
+
   def index
     #@projects = User.find().projects
     @user = User.find(session[:user_id])

@@ -1,6 +1,6 @@
 require 'pry'
 class TasksController < ApplicationController
-
+  before_action :require_login
 
   def index
     @user = User.find(session[:user_id])
@@ -68,5 +68,7 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:name,:creator,:section_id,:project_id,:status,:assignee,section_attributes:[:name,:project_id,:status,:creator])
   end
+
+  
 
 end

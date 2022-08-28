@@ -1,22 +1,31 @@
 class SessionsController < ApplicationController
 
+  def index
 
+  end
   def new
     @user = User.new
+    #binding.pry
   end
 
 
   def create
     #binding.pry
+    @user = User.find_by(username: params[:user][:username])
+    if !@user
+      render :new
+    end
     if(!params[:user].nil?)
+      #binding.pry
       @user = User.find_by(username: params[:user][:username])
-      if(@user && @user.authenticate(params[:user][:password]))
+      if(!@user.nil? && @user.authenticate(params[:user][:password]))
         session[:user_id] = @user.id
         redirect_to homepage_path
         else
-          redirect_to login_path
+          render :new
         end
       else
+
         #binding.pry
         @user =
           User.find_or_create_by(uid: auth['uid']) do |u|
@@ -29,7 +38,7 @@ class SessionsController < ApplicationController
         redirect_to homepage_path
 
       end
-
+      #render :new
 
   end
 
