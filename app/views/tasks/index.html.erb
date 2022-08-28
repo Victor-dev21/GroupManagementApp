@@ -2,11 +2,11 @@
 <%=link_to "My tasks", tasks_path%>
 <%=link_to "My projects", user_projects_path(@user.id)%>
 <a href="/logout">logout</a>
-<h1>My tasks </h1>
+<h1>My created tasks </h1>
 <%@user.projects.each do |project|%>
 <%project.tasks.each do |task|%>
 <%if !task.assignee.nil?%>
-<%=link_to task.name, task_path(task.id)%><br>
+<%=link_to task.name, task_path(task.id)%> Assigned: <%=task.display_assignee%><br>
 <%else%>
 <%=link_to task.name, task_path(task.id)%> No Assignee<br>
 <%end%>

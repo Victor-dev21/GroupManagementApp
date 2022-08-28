@@ -40,4 +40,8 @@ class Task < ActiveRecord::Base
       return User.find(self.assignee).name
     end
   end
+
+  def display_creator
+    User.find(self.creator).name
+  end
 end

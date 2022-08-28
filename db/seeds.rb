@@ -9,3 +9,12 @@
 User.all.each do |user|
   user.destroy
 end
+Project.all.each do |user|
+  user.destroy
+end
+Task.all.each do |user|
+  user.destroy
+end
+Section.all.each do |user|
+  user.destroy
+end

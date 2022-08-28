@@ -4,5 +4,5 @@
 <a href="/logout">logout</a>
 <h1>My projects</h1>
 <%@projects.each do |project|%>
-<%=link_to project.name, user_project_path(@user.id,project.id)%><br>
+<h3><%=link_to project.name, user_project_path(@user.id,project.id)%><br></h3>
 <%end%>

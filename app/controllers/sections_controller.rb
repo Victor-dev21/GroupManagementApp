@@ -25,34 +25,26 @@ class SectionsController < ApplicationController
     if(!@project.sections.include?(@section))
       @project.sections << @section
     end
-    #redirect_to project_section_path(@section.project.id,@section.id)
-    #@section.save
-    binding.pry
     redirect_to project_path(@project)
     end
   end
 
   def show
-
+    @user = User.find(session[:user_id])
     @section = Section.find(params[:id])
     @project = @section.project
-    @task = @section.tasks.build
-    #@task.project =
+    @task = @section.tasks.build(section_id: @section.id, project_id: @project.id, creator: @user.id)
   end
 
   def edit
     @project = Project.find(params[:project_id])
     @section = @project.sections.find(params[:id])
-  #  binding.pry
   end
 
   def update
-
     @project = Project.find(params[:section][:project_id])
-    #binding.pry
     @section = @project.sections.find(params[:id])
     @section.update(section_params)
-    #binding.pry
     redirect_to user_project_path(User.find(session[:user_id]),@project.id)
   end
 
@@ -62,7 +54,6 @@ class SectionsController < ApplicationController
     @section = @project.sections.find(params[:id])
     @section.destroy
     redirect_to user_project_path(User.find(session[:user_id]),@project.id)
-
   end
 
 private

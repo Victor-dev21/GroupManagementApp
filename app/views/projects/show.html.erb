@@ -10,6 +10,7 @@
 <%@sections.each do |section|%>
 <%if(section.creator == @user.id)%>
 <h2><u><%=link_to section.name, project_section_path(@project.id,section.id)%></u></h2>
+Status: <%=section.status%>
 <%=button_to "Edit", edit_project_section_path(@project.id,section.id),  method:"get"%><br>
 <%=button_to "Delete", delete_section_path(@project.id,section.id), method:"delete"%><br>
 <%end%>
