@@ -34,6 +34,11 @@ class ProjectsController < ApplicationController
     puts @sections.length
   end
 
+  def edit
+    @project = Project.find(params[:project_id])
+    @project.update(project_params)
+  end
+
   def destroy
     @project = Project.find(params[:project_id])
     @project.destroy

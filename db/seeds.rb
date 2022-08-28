@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Status.create(name:"Urgent")
-Status.create(name:"Complete")
-Status.create(name:"Pending")
+User.all.each do |user|
+  user.destroy
+end

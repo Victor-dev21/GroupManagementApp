@@ -14,7 +14,8 @@ class SessionsController < ApplicationController
     #binding.pry
     @user = User.find_by(username: params[:user][:username])
     if !@user
-      render :new
+      redirect_to login_path
+      return
     end
     if(!params[:user].nil?)
       #binding.pry

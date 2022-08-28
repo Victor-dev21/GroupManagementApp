@@ -15,18 +15,21 @@ class SectionsController < ApplicationController
 
   def create
     @user = User.find(session[:user_id])
-    @section = Section.find_or_create_by(name: params[:section][:name])
     @project = Project.find(params[:section][:project_id])
-    @section.update(project_id:@project.id,status:params[:section][:status],creator:@user.id)
-    #binding.pry
+    #@section = Section.find_or_create_by(section_params)
+    @section = Section.find_or_create_by(name: params[:section][:name])
+    @section.update(status:params[:section][:status] ,creator:params[:section][:creator] ,project_id:params[:section][:project_id])
+    if(!@section.valid?)
+      redirect_to new_project_section_path(@project.id)
+    else
     if(!@project.sections.include?(@section))
       @project.sections << @section
-      #binding.pry
     end
     #redirect_to project_section_path(@section.project.id,@section.id)
-    @section.save
-    #binding.pry
+    #@section.save
+    binding.pry
     redirect_to project_path(@project)
+    end
   end
 
   def show
@@ -65,6 +68,6 @@ class SectionsController < ApplicationController
 private
 
   def section_params
-    params.require(:section).permit(:name,:project_id,:status)
+    params.require(:section).permit(:name,:project_id,:status,:creator)
   end
 end
