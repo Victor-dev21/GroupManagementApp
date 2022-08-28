@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  #before_action :require_login
 
+  #include ApplicationHelper
   configure do
 
     #set :views, 'app/views'

@@ -1,4 +1,5 @@
 class SectionsController < ApplicationController
+  include ApplicationHelper
   before_action :require_login
 
   def index
@@ -36,6 +37,22 @@ class SectionsController < ApplicationController
     #@task.project =
   end
 
+  def edit
+    @project = Project.find(params[:project_id])
+    @section = @project.sections.find(params[:id])
+  #  binding.pry
+  end
+
+  def update
+
+    @project = Project.find(params[:section][:project_id])
+    #binding.pry
+    @section = @project.sections.find(params[:id])
+    @section.update(section_params)
+    #binding.pry
+    redirect_to user_project_path(User.find(session[:user_id]),@project.id)
+  end
+
 
   def destroy
     @project = Project.find(params[:project_id])
@@ -48,6 +65,6 @@ class SectionsController < ApplicationController
 private
 
   def section_params
-
+    params.require(:section).permit(:name,:project_id,:status)
   end
 end

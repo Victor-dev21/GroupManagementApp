@@ -1,6 +1,16 @@
 <h1><%=@project.name%></h1>
 
 <%=form_for @task do |t|%>
+<% if @task.errors.any? %>
+  <div id="error_explanation">
+    <h5>Errors:</h5>
+    <ul>
+      <% @task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
  <%= t.hidden_field :project_id%>
  <%= t.hidden_field :creator%>
   <%=t.label :task_name%>: <%=t.text_field :name%>

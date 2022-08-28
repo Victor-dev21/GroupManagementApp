@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  include ApplicationHelper
   before_action :require_login
 
   def index

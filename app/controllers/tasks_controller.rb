@@ -1,5 +1,6 @@
 require 'pry'
 class TasksController < ApplicationController
+  include ApplicationHelper
   before_action :require_login
 
   def index
@@ -20,12 +21,18 @@ class TasksController < ApplicationController
 
 
   def create
-    @task = Task.create(task_params)
-    @task.assign_task(session)
-    @user = User.find(session[:user_id])
-    UserTask.create(user_id: @user.id,task_id: @task.id)
+    @task = Task.new(task_params)
+    @project = Project.find(params[:task][:project_id])
     #binding.pry
-    redirect_to project_task_path(@task.project.id,@task.id)
+    if @task.valid?
+      @task.assign_task(session)
+      @user = User.find(session[:user_id])
+      UserTask.create(user_id: @user.id,task_id: @task.id)
+      redirect_to project_task_path(@task.project.id,@task.id)
+    else
+      #render new_project_task_path(@project.id)
+      redirect_to new_project_task_path(@project.id)
+    end
   end
 
   def show
@@ -69,6 +76,6 @@ class TasksController < ApplicationController
     params.require(:task).permit(:name,:creator,:section_id,:project_id,:status,:assignee,section_attributes:[:name,:project_id,:status,:creator])
   end
 
-  
+
 
 end

@@ -3,13 +3,16 @@
 <%=link_to "My projects", user_projects_path(@user.id)%>
 <a href="/logout">logout</a>
 <h1>My tasks </h1>
-<%@tasks.each do |task|%>
+<%@user.projects.each do |project|%>
+<%project.tasks.each do |task|%>
 <%if !task.assignee.nil?%>
-<%=link_to task.name, task_path(task.id)%><%=User.find(task.assignee).name%><br>
+<%=link_to task.name, task_path(task.id)%><br>
 <%else%>
 <%=link_to task.name, task_path(task.id)%> No Assignee<br>
 <%end%>
 <%end%>
+<%end%>
+<hr>
 <h4>Assigned tasks</h4>
 <%@assigned_tasks.each do |task|%>
 <%=link_to task.name, task_path(task.id)%><br>
