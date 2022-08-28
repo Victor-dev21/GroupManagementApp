@@ -10,8 +10,9 @@ class UsersController < ApplicationController
   def create
 
     @user = User.new(user_params)
-    puts "::::::::::::::::::::::::::::"
     if @user.save
+      @user.update(uid: @user.id)
+      @user.save
       session[:user_id] = @user.id
       redirect_to homepage_path
     else
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
 
 
   def user_params
-    params.require(:user).permit(:name,:username, :password, :password_confirmation)
+    params.require(:user).permit(:name,:username, :password, :password_confirmation,:uid)
   end
 
 

@@ -9,7 +9,7 @@ class Task < ActiveRecord::Base
   def section_attributes=(section)
 
     if(!section[:name].empty?)
-      binding.pry
+      #binding.pry
       status_temp = section[:status]
       creator_temp = section[:creator]
       section = Section.find_or_create_by(name: section[:name],project_id: section[:project_id])
@@ -18,14 +18,17 @@ class Task < ActiveRecord::Base
       section.save
       self.section = section
       self.save
-      binding.pry
+      #binding.pry
     end
   end
 
-  def assign_task
+  def assign_task(session)
+
     if self.assignee.nil?
-      self.assignee = self
+      self.update(assignee: self.creator)
+      binding.pry
     end
     self.save
+    binding.pry
   end
 end
