@@ -1,1 +1,1 @@
-# GroupManagementApp
+User is able to create a project. A project could have sections and tasks are created within those sections. A user could assign tasks to another user. The assignee could only view those tasks and not edit or delete them. User could view all their projects and sections within those projects.
