@@ -19,13 +19,11 @@ Rails.application.routes.draw do
     resources :sections, only:[:new,:create,:update]
     delete'/projects/:project_id/sections/:id', to: 'sections#destroy', as: 'delete_section'
 
-
-
-  resources :projects, only:[:index] do
-    resources :tasks, only:[:index,:new,:create,:show,:edit]
+  resources :projects do
+    resources :tasks, only:[:new,:show]
   end
 
-  resources :tasks, only:[:index,:new,:create,:show,:edit,:update]
+  resources :tasks, only:[:index,:create,:edit,:update]
   delete'/tasks/:id', to: 'tasks#destroy', as: 'delete_task'
 
 end
