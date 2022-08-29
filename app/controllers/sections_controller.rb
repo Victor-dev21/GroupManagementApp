@@ -8,13 +8,13 @@ class SectionsController < ApplicationController
 
 
   def new
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     @project = Project.find(params[:project_id])
     @section = Section.new(project_id: params[:project_id],creator: @user.id)
   end
 
   def create
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     @project = Project.find(params[:section][:project_id])
     #@section = Section.find_or_create_by(section_params)
     @section = Section.find_or_create_by(name: params[:section][:name])
@@ -30,14 +30,14 @@ class SectionsController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     @section = Section.find(params[:id])
     @project = @section.project
     @task = @section.tasks.build(section_id: @section.id, project_id: @project.id, creator: @user.id)
   end
 
   def edit
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     @project = Project.find(params[:project_id])
     @section = @project.sections.find(params[:id])
   end
@@ -46,7 +46,7 @@ class SectionsController < ApplicationController
     @project = Project.find(params[:section][:project_id])
     @section = @project.sections.find(params[:id])
     @section.update(section_params)
-    redirect_to user_project_path(User.find(session[:user_id]),@project.id)
+    redirect_to user_project_path(current_user(session),@project.id)
   end
 
 
@@ -54,7 +54,7 @@ class SectionsController < ApplicationController
     @project = Project.find(params[:project_id])
     @section = @project.sections.find(params[:id])
     @section.destroy
-    redirect_to user_project_path(User.find(session[:user_id]),@project.id)
+    redirect_to user_project_path(current_user(session),@project.id)
   end
 
 private

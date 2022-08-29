@@ -11,21 +11,20 @@ Rails.application.routes.draw do
   resources :users, only:[:index,:create,:show] do
     resources :projects, only:[:index,:new,:show,:create,:edit]
     end
-
+    delete'users/:user_id/projects/:id', to: 'projects#destroy', as: 'delete_user_project'
 
     resources :projects, only:[:index,:new,:show,:create,:edit,:update] do
-      resources :sections, only:[:index,:new,:create,:show,:edit]
+      resources :sections, only:[:index,:show,:new,:edit]
     end
-    resources :projects
-    delete'/projects/:id', to: 'projects#destroy', as: 'delete_project'
-
+    resources :sections, only:[:new,:create,:update]
     delete'/projects/:project_id/sections/:id', to: 'sections#destroy', as: 'delete_section'
 
-    resources :sections, only:[:index,:new,:create,:show,:edit,:update]
 
-  resources :projects, only:[:index,:new,:show,:create,:edit,:update] do
+
+  resources :projects, only:[:index] do
     resources :tasks, only:[:index,:new,:create,:show,:edit]
   end
+
   resources :tasks, only:[:index,:new,:create,:show,:edit,:update]
   delete'/tasks/:id', to: 'tasks#destroy', as: 'delete_task'
 

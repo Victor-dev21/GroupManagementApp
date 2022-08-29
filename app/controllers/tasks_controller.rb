@@ -5,14 +5,14 @@ class TasksController < ApplicationController
   layout "menu"
 
   def index
-    @user = User.find(session[:user_id])
-    @tasks = User.find(session[:user_id]).tasks
+    @user = current_user(session)
+    @tasks = current_user(session).tasks
     @assigned_tasks = Task.all.where(assignee: @user.id)
     #binding.pry
   end
 
   def new
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     @project = Project.find(params[:project_id])
     @sections = @project.sections
     @task = Task.new(project_id: @project.id,creator:@user.id)
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
     #binding.pry
     if @task.valid?
       @task.assign_task(session)
-      @user = User.find(session[:user_id])
+      @user = current_user(session)
       UserTask.create(user_id: @user.id,task_id: @task.id)
       redirect_to project_task_path(@task.project.id,@task.id)
     else
@@ -37,7 +37,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     #@project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
     @assignee = @task.display_assignee
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     @task = @user.tasks.find(params[:id])
     @project = @task.project
     @sections = @project.sections
@@ -75,7 +75,5 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:name,:creator,:section_id,:project_id,:status,:assignee,section_attributes:[:name,:project_id,:status,:creator])
   end
-
-
 
 end

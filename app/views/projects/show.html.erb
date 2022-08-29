@@ -3,7 +3,7 @@
 
 <%if(@project.creator == @user.id)%>
 <%=button_to "Edit project",edit_project_path(@project.id), method: :get%>
-<%=button_to "Delete project",delete_project_path(@project.id), method: :delete%>
+<%=button_to "Delete project",delete_user_project_path(@user.id,@project.id), method: :delete%>
 <%=button_to "New task", new_project_task_path(@project.id),  method:"get"%>
 <%=button_to "New section", new_project_section_path(@project.id), method:"get"%><br>
 <%end%>

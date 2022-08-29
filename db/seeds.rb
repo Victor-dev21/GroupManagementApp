@@ -18,3 +18,9 @@ end
 Section.all.each do |user|
   user.destroy
 end
+UserTask.all.each do |u|
+  u.destroy
+end
+UserProject.all.each do |u|
+  u.destroy
+end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   #before_action :require_login
-  layout "menu"
+  layout "menu", only:[:show]
   def index
 
   end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     render 'users/homepage'
   end
 
