@@ -59,7 +59,6 @@ class ProjectsController < ApplicationController
     UserProject.where(project_id:@project.id)[0].destroy
 
     @project.destroy
-    binding.pry
     #@project.destroy
     #binding.pry
     redirect_to user_projects_path(@user.id)
