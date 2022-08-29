@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
   include ApplicationHelper
   before_action :require_login
-
+  layout "menu"
   def index
 
   end

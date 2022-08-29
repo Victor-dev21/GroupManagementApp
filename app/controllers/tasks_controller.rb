@@ -2,6 +2,7 @@ require 'pry'
 class TasksController < ApplicationController
   include ApplicationHelper
   before_action :require_login
+  layout "menu"
 
   def index
     @user = User.find(session[:user_id])

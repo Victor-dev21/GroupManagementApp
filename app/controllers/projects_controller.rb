@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   include ApplicationHelper
   before_action :require_login
-
+  layout "menu"
   def index
     #@projects = User.find().projects
     @user = User.find(session[:user_id])
