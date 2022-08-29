@@ -1,31 +1,4 @@
 <h1><%=@project.name%></h1>
 
-<%=form_for @task do |t|%>
-<% if @task.errors.any? %>
-  <div id="error_explanation">
-    <h5>Errors:</h5>
-    <ul>
-      <% @task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
- <%= t.hidden_field :project_id%>
- <%= t.hidden_field :creator%>
-  <%=t.label :task_name%>: <%=t.text_field :name%>
-  <%=t.label :status%>: <%=t.text_field :status%>
-  <%=t.label :assignee%>: <%=t.collection_select :assignee, User.all,:id,:name, include_blank: 'Select an assignee'%>
-  <%=t.label :section%>: <%=t.collection_select :section_id, @sections,:id,:name, include_blank: 'Select a section'%>
 
-
-
-  <%=t.fields_for :section,@task.build_section do |f|%>
-  <%= f.hidden_field :project_id, value: @project.id%>
-  <%= f.hidden_field :creator, value: @user.id%>
-  <%=f.label :section_name%>: <%=f.text_field :name%>
-  <%=f.label :status%>: <%=f.text_field :status%>
-  <%end%>
-  <%=t.submit%>
-
-<%end%>
+<%=render partial: "form", locals: {task:@task}%>

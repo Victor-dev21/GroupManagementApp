@@ -48,7 +48,6 @@ class TasksController < ApplicationController
 
   def edit
     @user = User.find(session[:user_id])
-
     @task = @user.tasks.find(params[:id])
     @project = @task.project
     @sections = @project.sections
