@@ -2,9 +2,10 @@ class ProjectsController < ApplicationController
   include ApplicationHelper
   before_action :require_login
   layout "menu"
+   
   def index
     #@projects = User.find().projects
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     if(session[:user_id])
       @projects = @user.projects
     end
@@ -28,7 +29,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    @user = current_user(session)
     @project = Project.find(params[:id])
     @sections = @project.sections
     #binding.pry
