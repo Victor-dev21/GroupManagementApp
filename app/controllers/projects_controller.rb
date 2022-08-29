@@ -31,18 +31,30 @@ class ProjectsController < ApplicationController
     @user = User.find(session[:user_id])
     @project = Project.find(params[:id])
     @sections = @project.sections
-    puts @sections.length
+    #binding.pry
   end
 
   def edit
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:id])
+    @user = User.find(session[:user_id])
+    #binding.pry
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    @user = User.find(session[:user_id])
     @project.update(project_params)
+    #binding.pry
+    redirect_to user_projects_path(@user.id)
   end
 
   def destroy
-    @project = Project.find(params[:project_id])
+    #binding.pry
+    @project = Project.find(params[:id])
+    @user = User.find(session[:user_id])
     @project.destroy
-    redirect_to homepage_path
+    #binding.pry
+    redirect_to user_projects_path(@user.id)
   end
 
 
