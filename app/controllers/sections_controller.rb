@@ -37,6 +37,7 @@ class SectionsController < ApplicationController
   end
 
   def edit
+    @user = User.find(session[:user_id])
     @project = Project.find(params[:project_id])
     @section = @project.sections.find(params[:id])
   end
